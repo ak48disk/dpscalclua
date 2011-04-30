@@ -1,6 +1,6 @@
 Meta2Intel = EffectSimple:Create(function() PlayerAddStatsMultiplier(PS_INTELLIGENCE,0.02) end)
 
-Meta2Chaoic = EffectSimple:Create(function() PlayerSetCritBonus( ((1.5*1.03)-1)*2 + 1 ) end )
+MetaChaoic = EffectSimple:Create(function() PlayerSetCritBonus( ((1.5*1.03)-1)*2 + 1 ) end )
 --[[
 FIXED 2011-4-30
 from http://www.wowhead.com/item=41285/chaotic-skyflare-diamond#comments
@@ -14,8 +14,9 @@ The largest example is with shaman, warlock, or ice mage spells fully talented. 
 
 Human3Spirit = EffectSimple:Create(function() PlayerAddStatsMultiplier(PS_SPIRIT,0.03) end)
 
-TrollBerserking = EffectWithCooldownProto:Create( function() PlayerAddStats(PS_HASTE_RATING,PrecentageToRating(PS_HASTE_RAITING,0.2)) end,
-	function() PlayerAddStats(PS_HASTE_RATING,(-1) * PrecentageToRating(PS_HASTE_RAITING,0.2)) end,
+TrollBerserking = EffectWithCooldownProto:Create( function() PlayerAddStats(PS_HASTE_RATING,PlayerPrecentageToRating(PS_HASTE_RATING,0.2)) end,
+	function() PlayerAddStats(PS_HASTE_RATING,(-1) * PlayerPrecentageToRating(PS_HASTE_RATING,0.2)) end,
 	"TrollBerserking",true,180000,10000,nil,nil,nil
 )
+
 
