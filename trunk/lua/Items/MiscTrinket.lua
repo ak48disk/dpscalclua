@@ -26,3 +26,27 @@ VolatilePowerHelperH = EffectStackableProto:Create( function() PlayerAddStats(PS
 
 EffectManager:Attach(VolatilePowerHelperH)
 
+FlareHeaven = EffectWithCooldownProto:Create( function() PlayerAddStats(PS_SPELL_POWER,850) end ,
+	function() PlayerAddStats(PS_SPELL_POWER,-850) end,
+	"FlareHeaven",false,45000,10000,0.1,0.1,0.1
+)
+
+TriumphBadgeTrinket = EffectWithCooldownProto:Create( function() PlayerAddStats(PS_SPELL_POWER,599) end,
+	function() PlayerAddStats(PS_SPELL_POWER,-599) end,
+	"TriumphBadgeTrinket",true,120000,20000,nil,nil,nil
+)
+
+TriumphBadgeTrinket2 = EffectWithCooldownProto:Create( function() PlayerAddStats(PS_HASTE_RATING,512) end,
+	function() PlayerAddStats(PS_HASTE_RATING,-512) end,
+	"TriumphBadgeTrinket2",true,120000,20000,nil,nil,nil
+)
+
+ScaleofFates = EffectWithCooldownProto:Create( function() PlayerAddStats(PS_HASTE_RATING,432) end,
+	function() PlayerAddStats(PS_HASTE_RATING,-432) end,
+	"ScaleofFates",true,120000,20000,nil,nil,nil
+)
+
+Broodmother =  EffectStackableProto:Create( function() PlayerAddStats(PS_SPELL_POWER,25) end , function() PlayerAddStats(PS_SPELL_POWER,-25) end,
+	"Broodmother",0,10000,5,1,1,1)
+
+
