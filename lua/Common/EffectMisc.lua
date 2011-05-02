@@ -20,3 +20,7 @@ TrollBerserking = EffectWithCooldownProto:Create( function() PlayerAddStats(PS_H
 )
 
 
+BlackMagic = EffectWithCooldownProto:Create( function() PlayerAddStats(PS_HASTE_RATING,250) end ,
+	function() PlayerAddStats(PS_HASTE_RATING,-250) end,
+	"BlackMagic",false,35000,10000,0.35,0.35,nil
+)
