@@ -234,7 +234,7 @@ end
 
 function PostCastingSpellRoutine(spellID)
 	_PostCastingSpellRoutine(spellID)
-	if spellID == SpellNameToID("Devoring Plague") then
+	if spellID == SpellNameToID("Improved Devoring Plague") then
 		if PriestTalent.ImprovedDP.Enabled then
 			EventAddStats(CS_DAMAGE,PlagueAdditionalDamage)
 		end

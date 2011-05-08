@@ -53,7 +53,7 @@ function PlayerIdleRoutine()
 		return
 	end
 	if not UnitAuraApplied("target1",idDot3) then
-		CastSpellByName("Devoring Plague","target1")
+		CastSpellByName("Improved Devoring Plague","target1")
 		return 
 	end
 	local tk,fd = UnitAuraApplied("target1",idDot1)
