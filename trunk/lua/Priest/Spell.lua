@@ -22,7 +22,7 @@ SpellAdd("Vampiric Touch",SPELL_AURA_APPLICATION,1500,0,SPELL_SCHOOL_SHADOW,nil,
 end
 
 SpellAdd("Shadow Word: Pain",SPELL_AURA_APPLICATION,0,0,SPELL_SCHOOL_SHADOW,nil,nil,AuraNameToID("Shadow Word: Pain"),18000)
-SpellAdd("Devoring Plague",SPELL_DAMAGE + SPELL_AURA_APPLICATION,0,0,SPELL_SCHOOL_SHADOW,0,0,AuraNameToID("Devoring Plague"),24000)
+SpellAdd("Improved Devoring Plague",SPELL_DAMAGE + SPELL_AURA_APPLICATION,0,0,SPELL_SCHOOL_SHADOW,0,0,AuraNameToID("Devoring Plague"),24000)
 
 
 FourT10Enabled = 1
