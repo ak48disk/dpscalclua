@@ -1,7 +1,7 @@
 DislodgedObjectH = DislodgedObjectH or {}
 
 DislodgedObjectH.Stacks = 0
-DislodgedObjectH.ProcChance = 0.3
+DislodgedObjectH.ProcChance = 0.1
 DislodgedObjectH.LastTickTime = nil
 DislodgedObjectH.Aura = nil
 
@@ -18,10 +18,16 @@ end
 
 function DislodgedObjectH:Enable()
 	local _PostCastingSpellRoutine = PostCastingSpellRoutine
+	local _PostSpellChannelRoutine = PostSpellChannelRoutine
 	local _AuraFadeRoutine = AuraFadeRoutine
 	
 	function PostCastingSpellRoutine(spellID)
 		_PostCastingSpellRoutine(spellID)
+		self:Proc()
+	end
+	
+	function PostSpellChannelRoutine(spellID)
+		_PostSpellChannelRoutine(spellID)
 		self:Proc()
 	end
 		
