@@ -35,6 +35,7 @@ CPlayer::CPlayer(const CEventSystem* pEventSystem) :
 	m_dHitRatingMultiplier = 0;
 	m_dHasteRatingMultiplier = 0;
 	m_iGlabalCooldownRecovery = 0;
+	m_iAdditionalHastePrecentage = 0;
 	m_dCritBonus = 2.0;
 	m_bIsCasting = false;
 	m_CastingSpell = NULL;
@@ -68,7 +69,8 @@ double CPlayer::RatingToPrecentage(uint32 iRating, eL_PlayerPrecentage e_Precent
 }
 
 double CPlayer::Get_HastePrecentage() const	{
-	return RatingToPrecentage(Get_HasteRating(),PP_HASTE_PRECENTAGE);
+	return RatingToPrecentage(Get_HasteRating(),PP_HASTE_PRECENTAGE) * (1.0 + 
+		Get_AdditionalHastePrecentage() );
 }
 
 double CPlayer::Get_HitPrecentage() const  {

@@ -25,7 +25,13 @@ public:
 	CLASS_ELEMENT_UINT32(HitRating);
 	CLASS_ELEMENT(const CSpellEvent*,CastingSpell);
 	CLASS_ELEMENT(double,dCritBonus);
-
+	EVENT_ADDITIONAL_ELEMENT_X(double,HastePrecentage);
+	void AddHastePrecentage(const double HastePrecentage) { 
+		if (HastePrecentage > 0)
+			m_iAdditionalHastePrecentage = (1.0+m_iAdditionalHastePrecentage) * (1.0+HastePrecentage) - 1.0; 
+		else
+			m_iAdditionalHastePrecentage = (1.0+m_iAdditionalHastePrecentage) / (1.0-HastePrecentage) - 1; 
+	} 
 	//CLASS_ELEMENT(bool,bIdle);
 
 	bool IsIdle() const;
@@ -69,6 +75,9 @@ private:
 	double m_dCritRatingMultiplier;
 	double m_dHasteRatingMultiplier;
 	double m_dHitRatingMultiplier;
+
+	double m_iAdditionalHastePrecentage;
+
 	double m_dCritBonus;
 
 	uint32 m_iGlabalCooldownRecovery;
