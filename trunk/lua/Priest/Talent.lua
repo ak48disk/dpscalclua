@@ -95,6 +95,9 @@ function PriestTalent.Misery:Enable()
 end
 
 
+Plague30Damage = EffectSimple:Create( function(self) self.Enabled = 1 end )
+
+
 function PlayerAddStatsMultiplier(stats,value)
 	local retVal = _PlayerAddStatsMultiplier(stats,value)
 	if PriestTalent.TwistedFaith.Enabled then
@@ -336,6 +339,9 @@ function PrePeriodicEventRoutine(auraID)
 	if auraID == idDotDP then
 		if PriestTalent.ImprovedDP.Enabled then
 			EventAddStats(CS_DAMAGE_PRECENTAGE,0.15) 
+		end
+		if Plague30Damage.Enabled then
+			EventAddStats(CS_DAMAGE_PRECENTAGE,0.3,8) 
 		end
 	end
 	

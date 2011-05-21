@@ -57,7 +57,7 @@ function PlayerIdleRoutine()
 		return 
 	end
 	local tk,fd = UnitAuraApplied("target1",idDot1)
-	if (not tk) or (fd<1100) then
+	if (not tk) or (not fd) or (fd<1000) then
 		CastSpellByName("Vampiric Touch","target1")
 		return
 	end

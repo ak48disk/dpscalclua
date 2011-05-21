@@ -14,8 +14,8 @@ The largest example is with shaman, warlock, or ice mage spells fully talented. 
 
 Human3Spirit = EffectSimple:Create(function() PlayerAddStatsMultiplier(PS_SPIRIT,0.03) end)
 
-TrollBerserking = EffectWithCooldownProto:Create( function() PlayerAddStats(PS_HASTE_RATING,PlayerPrecentageToRating(PS_HASTE_RATING,0.2)) end,
-	function() PlayerAddStats(PS_HASTE_RATING,(-1) * PlayerPrecentageToRating(PS_HASTE_RATING,0.2)) end,
+TrollBerserking = EffectWithCooldownProto:Create( function() PlayerAddStats(PS_HASTE_PRECENTAGE,0.2) end,
+	function() PlayerAddStats(PS_HASTE_PRECENTAGE,-0.2) end,
 	"TrollBerserking",true,180000,10000,nil,nil,nil
 )
 

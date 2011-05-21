@@ -1,0 +1,8 @@
+#Priest Scripts
+#
+#
+Priest\Aura.lua
+Priest\Spell.lua
+Priest\Talent.lua
+Priest\Sets.lua
+Priest\Glyph.lua
