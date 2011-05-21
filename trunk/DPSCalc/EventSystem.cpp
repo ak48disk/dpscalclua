@@ -6,6 +6,7 @@
 #include "LuaIntergration.h"
 #define printf
 void ReportDamage(const char* strSpellName,uint32 iDamage,uint32 iGameTime,bool isCrit);
+extern bool bNormalizeCrit;
 
 #pragma region EventSystem
 CEventSystem::CEventSystem()
@@ -426,10 +427,15 @@ int CAuraEvent::AuraPeriodic(int param)
 
 	CalculatedDamage = this->Get_Damage();
 
-	if (crit)
-		ReportDamage(m_pAura->Get_strAuraName(),CalculatedDamage*m_thePlayer->Get_dCritBonus(),m_pEventSystem->Get_iGameTime(),crit);
+	if (bNormalizeCrit)
+		ReportDamage(m_pAura->Get_strAuraName(),CalculatedDamage*( 1 + (m_thePlayer->Get_dCritBonus()-1)*CEvent::Get_CritChance() ),m_pEventSystem->Get_iGameTime(),crit);
 	else
-		ReportDamage(m_pAura->Get_strAuraName(),CalculatedDamage,m_pEventSystem->Get_iGameTime(),crit);
+	{
+		if (crit)
+			ReportDamage(m_pAura->Get_strAuraName(),CalculatedDamage*m_thePlayer->Get_dCritBonus(),m_pEventSystem->Get_iGameTime(),crit);
+		else
+			ReportDamage(m_pAura->Get_strAuraName(),CalculatedDamage,m_pEventSystem->Get_iGameTime(),crit);
+	}
 
 	CallLuaFunction("PostPeriodicEventRoutine",	m_pAura->Get_iAuraID() );
 #pragma endregion 
@@ -684,11 +690,16 @@ int CSpellEvent::PostAction (int param)
 	}
 
 	// Report damage
-	if (crit)
-		ReportDamage(m_pSpell->Get_SpellName(),CalculatedDamage*m_thePlayer->Get_dCritBonus(),m_pEventSystem->Get_iGameTime(),crit);
+	if (bNormalizeCrit)
+		ReportDamage(m_pSpell->Get_SpellName(),CalculatedDamage*( 1 + (m_thePlayer->Get_dCritBonus()-1)*CEvent::Get_CritChance() ),m_pEventSystem->Get_iGameTime(),crit);
 	else
-		ReportDamage(m_pSpell->Get_SpellName(),CalculatedDamage,m_pEventSystem->Get_iGameTime(),crit);
-	
+	{
+		if (crit)
+			ReportDamage(m_pSpell->Get_SpellName(),CalculatedDamage*m_thePlayer->Get_dCritBonus(),m_pEventSystem->Get_iGameTime(),crit);
+		else
+			ReportDamage(m_pSpell->Get_SpellName(),CalculatedDamage,m_pEventSystem->Get_iGameTime(),crit);
+	}
+
 	printf("[%d]Cast spell:%s [%d]\n",m_pEventSystem->Get_iGameTime(),m_pSpell->Get_SpellName(),CalculatedDamage);
 
 	return 0;
