@@ -104,6 +104,7 @@ CEvent::CEvent(CPlayer* thePlayer)
 	m_iAdditionalCastTime = 0;
 	m_iAdditionalCooldown = 0;
 	m_iAdditionalHitRaiting = 0;
+	m_iAdditionalHastePrecentage = 0;
 	m_thePlayer = thePlayer;
 	m_Parent = NULL;
 }
@@ -121,6 +122,7 @@ void CEvent::ResetAdditionals()
 	m_iAdditionalCastTime = 0;
 	m_iAdditionalCooldown = 0;
 	m_iAdditionalHitRaiting = 0;
+	m_iAdditionalHastePrecentage = 0;
 }
 
 double CEvent::Get_CritChance()
@@ -158,7 +160,7 @@ uint32 CEvent::GetCastTimeWithHaste(uint32 iOriginalTime)
 		m_thePlayer->RatingToPrecentage (this->Get_AdditionalHasteRaiting() ,  PP_HASTE_PRECENTAGE);
 
 	return static_cast<uint32> (
-			static_cast<double> (iOriginalTime) / (1.0 + HastePrecentage)
+		static_cast<double> (iOriginalTime) / (1.0 + HastePrecentage) / (1.0 + m_iAdditionalHastePrecentage)
 		);
 }
 
@@ -519,7 +521,7 @@ double CSpellEvent::Get_HitChance()
 double CSpellEvent::GetCastTime()
 {
 	return CEvent::GetCastTimeWithHaste(
-		m_pSpell->Get_SpellCastTime() );
+		m_pSpell->Get_SpellCastTime() ) + CEvent::Get_AdditionalCastTime() ;
 }
 
 int CSpellEvent::operator () (int param)

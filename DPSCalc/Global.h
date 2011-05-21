@@ -53,7 +53,8 @@ enum eL_PlayerStats {
 	PS_SPELL_POWER		=	5,
 	PS_INTELLIGENCE		=	6,
 	PS_SPIRIT			=	7,
-	PS_INVAILD_MAX		=	8
+	PS_HASTE_PRECENTAGE	=	8,
+	PS_INVAILD_MAX		=	9
 };
 
 enum eL_PlayerPrecentage {
@@ -75,7 +76,8 @@ enum eL_CombatStsts  {
 	CS_HASTE_RATING		=	8,
 	CS_CAST_TIME		=	9,
 	CS_COOLDOWN			=	10,
-	CS_INVAILD_MAX		=	11
+	CS_HASTE_PRECENTAGE =	11,
+	CS_INVAILD_MAX		=	12
 };
 
 

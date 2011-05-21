@@ -360,6 +360,9 @@ bool __forceinline EventStats(uint32 iStatsType,bool isAdd,double& Value,uint32 
 		case CS_COOLDOWN:
 			pEvent->AddCooldown(Value);
 			break;
+		case CS_HASTE_PRECENTAGE:
+			
+			break;
 		default:
 			return false;
 		
@@ -584,9 +587,9 @@ PlayerGetPercentage(stats)
 */
 int LUAEXPORT L_PlayerAddStats(lua_State* L)
 {
-	uint32 e_Type; int32 iStatValue;
+	uint32 e_Type; double iStatValue;
 	LUA_TO_INTEGER(L,1,e_Type);
-	LUA_TO_INTEGER(L,2,iStatValue);
+	LUA_TO_NUMBER(L,2,iStatValue);
 	if (e_Type <= PS_LEVEL || e_Type >= PS_INVAILD_MAX)  {
 		LUA_ERROR(L,"Invaild param #1");
 	}
@@ -609,6 +612,9 @@ int LUAEXPORT L_PlayerAddStats(lua_State* L)
 		case PS_SPIRIT:
 			GetCurrentPlayer()->AddSpirit(iStatValue);
 			break;
+		case PS_HASTE_PRECENTAGE:
+			GetCurrentPlayer()->AddHastePrecentage(iStatValue);
+			break;
 		default:
 			// Should never reach here
 			assert(0);
@@ -619,7 +625,7 @@ int LUAEXPORT L_PlayerAddStats(lua_State* L)
 
 int LUAEXPORT L_PlayerGetStats(lua_State* L)
 {
-	uint32 e_Type; uint32 iStatValue;
+	uint32 e_Type; double iStatValue;
 	LUA_TO_INTEGER(L,1,e_Type);
 	if (e_Type <= PS_LEVEL || e_Type >= PS_INVAILD_MAX)  {
 		LUA_ERROR(L,"Invaild param #1");
@@ -642,6 +648,9 @@ int LUAEXPORT L_PlayerGetStats(lua_State* L)
 			break;
 		case PS_SPIRIT:
 			iStatValue = GetCurrentPlayer()->Get_Spirit();
+			break;
+		case PS_HASTE_PRECENTAGE:
+			iStatValue = GetCurrentPlayer()->Get_HastePrecentage();
 			break;
 		default:
 			// Should never reach here
@@ -1054,15 +1063,15 @@ bool LoadTOCFile(const char* fileName)
 				continue;
 			if(Buffer[0] == '#') continue;
 
-			sprintf(ScriptToLoad,"lua\\%s",Buffer);
 			// Strip \r and \n
-			if (NewLinePosition = strstr(ScriptToLoad,"\r") ) *NewLinePosition = 0;
-			if (NewLinePosition = strstr(ScriptToLoad,"\n") ) *NewLinePosition = 0;
+			if (NewLinePosition = strstr(Buffer,"\r") ) *NewLinePosition = 0;
+			if (NewLinePosition = strstr(Buffer,"\n") ) *NewLinePosition = 0;
 
-
+			sprintf(ScriptToLoad,"lua\\%s",Buffer);
+			
 			if (strstr(ScriptToLoad,".toc"))
 			{
-				if (!LoadTOCFile(ScriptToLoad)) return false;
+				if (!LoadTOCFile(Buffer)) return false;
 				continue;
 			}
 			

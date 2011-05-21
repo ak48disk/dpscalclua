@@ -68,7 +68,7 @@ public:
 	EVENT_ADDITIONAL_ELEMENT(int32,HitRaiting);
 	EVENT_ADDITIONAL_ELEMENT(int32,CastTime);
 	EVENT_ADDITIONAL_ELEMENT(int32,Cooldown);
-
+	EVENT_ADDITIONAL_ELEMENT(double,HastePrecentage);
 
 protected:
 	e_EventType m_EventType;
@@ -85,6 +85,7 @@ private:
 	void SetEventSystem(CEventSystem* pEventSystem){m_pEventSystem = pEventSystem;}
 	int32 m_iAdditionalDamage;
 	double m_iAdditionalDamagePrecentage[16];
+	double m_iAdditionalHastePrecentage;
 	int32 m_iAdditionalCritRaiting;
 	int32 m_iAdditionalHasteRaiting;
 	int32 m_iAdditionalCastTime;
