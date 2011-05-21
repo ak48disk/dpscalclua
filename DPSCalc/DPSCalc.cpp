@@ -10,7 +10,7 @@
 
 #include <iostream>
 #include <ctime>
-
+bool bNormalizeCrit;
 uint32 iDamageCounter = 0;
 #include <Windows.h>
 
@@ -69,6 +69,7 @@ float __stdcall Perform(char* AdditionalLua,char* PreloadAdditionalLua,int isSav
 	CPlayer* Player = new CPlayer(theEventSystem);
 	SetCurrentPlayer(Player);
 
+	bNormalizeCrit = !isDetail;
 	if (isDetail)
 		pReporter = new CDefaultReporter(isSave);
 	else
