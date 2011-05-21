@@ -21,11 +21,8 @@ Common\EffectManager.lua
 Common\PartialResistance.lua
 Common\EffectPrototype.lua
 Common\EffectMisc.lua
-Priest\Aura.lua
-Priest\Spell.lua
-Priest\Talent.lua
-Priest\Sets.lua
-Priest\Glyph.lua
+Common\EffectRaidBuff.lua
+Priest\Priest.toc
 Items\SpyglassH.lua
 Items\AbyssalRune.lua
 Items\HyperSpeedAcc.lua

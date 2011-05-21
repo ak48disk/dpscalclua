@@ -9,7 +9,7 @@ function EffectSimple:Create(enableFunc)
 end
 
 function EffectSimple:Enable()
-	if self.enableFunc then self.enableFunc() end
+	if self.enableFunc then self.enableFunc(self) end
 end
 
 function EffectSimple:IsReady()
@@ -19,6 +19,9 @@ end
 function EffectSimple:Use()
 end
 
+function EffectSimple:SetParam(Param)
+	self.param = Param
+end
 
 EffectWithCooldownProto = {}
 
@@ -42,6 +45,7 @@ end
 
 function EffectWithCooldownProto:IsReady()
 	if not self.useable then return false end
+	if self.applied then return false end
 	return self:IsCooldown()
 end
 
@@ -99,14 +103,16 @@ function EffectWithCooldownProto:Enable()
 	function AuraApplicationRoutine(auraID)
 		_AuraApplicationRoutine(auraID)
 		if auraID == self.aura then
-			self.applyFunc()
+			self.applyFunc(self)
+			self.applied = 1
 		end
 	end
 	
 	function AuraFadeRoutine(auraID)
 		_AuraFadeRoutine(auraID)
 		if auraID == self.aura then
-			self.fadeFunc()
+			self.fadeFunc(self)
+			self.applied = nil
 		end
 	end
 	
@@ -191,7 +197,7 @@ function EffectStackableProto:Enable()
 		_AuraApplicationRoutine(auraID)
 		if auraID == self.aura then
 			if self.stacks < self.maxStacks then
-				self.applyFunc()
+				self.applyFunc(self)
 				self.stacks = self.stacks and self.stacks + 1 or 1
 			end
 		end
@@ -202,7 +208,7 @@ function EffectStackableProto:Enable()
 		local i
 		if auraID == self.aura then
 			for i=1,self.stacks do 
-				self.fadeFunc()
+				self.fadeFunc(self)
 			end
 			self.stacks = 0
 		end
